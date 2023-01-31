@@ -17,15 +17,22 @@ const invokeAction = async ({ action, id, data }) => {
       const newContact = await contactsOperations.addContact(data);
       console.log(newContact);
       break;
+    case "removeContactById":
+      const removeContact = await contactsOperations.removeContactById(id);
+      console.log(removeContact);
+      break;
     default:
       console.log("Unknown action");
   }
 };
 
-const newContact = {
-  name: "Vira Seva",
-  email: "viraS@ukr.net",
-  phone: "(030) 777-4444",
-};
+// const newContact = {
+//   name: "Vira Seva",
+//   email: "viraS@ukr.net",
+//   phone: "(030) 777-4444",
+// };
 
-invokeAction({ action: "addContact", data: newContact });
+// invokeAction({ action: "removeContactById", data: newContact });
+
+const updateId = "82227751-3925-4565-b9af-18207559dee7";
+invokeAction({ action: "removeContactById", id: updateId });
