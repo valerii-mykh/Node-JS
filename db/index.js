@@ -1,4 +1,4 @@
-const listContacts = require("./contact/listContacts");
+const listContacts = require("./listContacts");
 // const getContactById = require("./contact/getContactById");
 
 module.exports = {
