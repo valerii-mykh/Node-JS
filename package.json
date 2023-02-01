@@ -20,6 +20,7 @@
   "homepage": "https://github.com/valerii-mykh/Node-JS#readme",
   "dependencies": {
     "nodemon": "^2.0.20",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yargs": "^17.6.2"
   }
 }

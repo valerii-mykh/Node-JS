@@ -1,3 +1,5 @@
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
 const contactsOperations = require("./db");
 
 const invokeAction = async ({ action, id, data }) => {
@@ -25,14 +27,10 @@ const invokeAction = async ({ action, id, data }) => {
       console.log("Unknown action");
   }
 };
+// const id = "1";
+// invokeAction({ action: "getContactById", id });
 
-// const newContact = {
-//   name: "Vira Seva",
-//   email: "viraS@ukr.net",
-//   phone: "(030) 777-4444",
-// };
+const arr = hideBin(process.argv);
 
-// invokeAction({ action: "removeContactById", data: newContact });
-
-const updateId = "82227751-3925-4565-b9af-18207559dee7";
-invokeAction({ action: "removeContactById", id: updateId });
+const { argv } = yargs(arr);
+invokeAction(argv);
