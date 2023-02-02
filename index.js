@@ -1,4 +1,4 @@
-const contactsOperations = require("./db/contacts");
+const contactsOperations = require("./contacts");
 
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {

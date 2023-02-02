@@ -1,5 +1,6 @@
 const { invokeAction } = require("./index");
-const { program } = require("commander");
+const { Command } = require("commander");
+const program = new Command();
 
 program
   .option("-a, --action <type>", "choose action")
@@ -9,6 +10,6 @@ program
   .option("-p, --phone <type>", "user phone");
 program.parse(process.argv);
 
-const options = program.opts();
+const argv = program.opts();
 
-invokeAction(options);
+invokeAction(argv);
