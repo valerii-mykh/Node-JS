@@ -1,50 +1,36 @@
-const fs = require("fs/promises");
-const { v4 } = require("uuid");
-const path = require("path");
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
+const contactsOperations = require("./db");
 
-const contactsPath = path.join(__dirname, "contacts.json");
-
-const list = async () => {
-  const dataString = await fs.readFile(contactsPath, "utf8");
-  const data = JSON.parse(dataString);
-  return data;
-};
-
-const get = async (id) => {
-  const allContacts = await list();
-  const contact = allContacts.find((contact) => contact.id === id);
-  // if (!contact) {
-  //   return null;
-  // }
-  // return contact;
-  return contact ? contact : null;
-};
-const add = async (name, email, phone) => {
-  const newProduct = {
-    id: uuid.v4(),
-    name: name,
-    email: email,
-    phone: phone,
-  };
-  const allContacts = await list();
-  allContacts.push(newContact);
-  await fs.writeFile(contactsPath, JSON.stringify(allContacts));
-  return newContact;
-};
-
-const remove = async (id) => {
-  const allContacts = await list();
-  const idx = allContacts.findIndex((contact) => contact.id === id);
-  const removeContact = allContacts.splice[index];
-  if (idx === -1) {
-    allContacts.splice(idx, 1);
-    await fs.writeFile(contactsPath, JSON.stringify(allContacts));
+const invokeAction = async ({ action, id, data }) => {
+  switch (action) {
+    case "listContacts":
+      const contacts = await contactsOperations.listContacts();
+      console.log("listContacts", contacts);
+      break;
+    case "getContactById":
+      const contact = await contactsOperations.getContactById(id);
+      if (!contact) {
+        throw new Error(`Contact with id=${id} not found`);
+      }
+      console.log("getContactById", contact);
+      break;
+    case "addContact":
+      const newContact = await contactsOperations.addContact(data);
+      console.log(newContact);
+      break;
+    case "removeContactById":
+      const removeContact = await contactsOperations.removeContactById(id);
+      console.log(removeContact);
+      break;
+    default:
+      console.log("Unknown action");
   }
-  return removeContact ? removeContact : null;
 };
-module.exports = {
-  list,
-  get,
-  add,
-  remove,
-};
+// const id = "1";
+// invokeAction({ action: "getContactById", id });
+
+const arr = hideBin(process.argv);
+
+const { argv } = yargs(arr);
+invokeAction(argv);
