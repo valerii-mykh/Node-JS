@@ -1,28 +1,28 @@
 const contactsOperations = require("./db/contacts");
 
-const invokeAction = async ({ action, id, data }) => {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
-    case "listContacts":
-      const contacts = await contactsOperations.listContacts();
-      console.log("listContacts", contacts);
+    case "list":
+      const contacts = await contactsOperations.list();
+      console.log("list", contacts);
       break;
-    case "getContactById":
-      const contact = await contactsOperations.getContactById(id);
+    case "get":
+      const contact = await contactsOperations.get(id);
       if (!contact) {
         throw new Error(`Contact with id=${id} not found`);
       }
-      console.log("getContactById", contact);
+      console.log("get", contact);
       break;
-    case "addContact":
-      const newContact = await contactsOperations.addContact(data);
+    case "add":
+      const newContact = await contactsOperations.add(name, email, phone);
       console.log(newContact);
       break;
-    case "removeContactById":
-      const removeContact = await contactsOperations.removeContactById(id);
+    case "remove":
+      const removeContact = await contactsOperations.remove(id);
       console.log(removeContact);
       break;
     default:
-      console.log("Unknown action");
+      console.warn("\x1B[31m Unknown action type!");
   }
 };
 
