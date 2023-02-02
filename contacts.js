@@ -1,8 +1,8 @@
-const yargs = require("yargs");
+const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const contactsOperations = require("./db");
 
-const invokeAction = async ({ action, id, data }) => {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "listContacts":
       const contacts = await contactsOperations.listContacts();
@@ -16,7 +16,11 @@ const invokeAction = async ({ action, id, data }) => {
       console.log(contact);
       break;
     case "addContact":
-      const newContact = await contactsOperations.addContact(data);
+      const newContact = await contactsOperations.addContact(
+        name,
+        email,
+        phone
+      );
       console.log(newContact);
       break;
     case "removeContactById":

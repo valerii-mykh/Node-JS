@@ -9,7 +9,8 @@ const removeContactById = async (id) => {
   }
   const [removeContact] = contacts.splice(idx, 1);
   await updateContacts(contacts);
-  return removeContact;
+  console.table(contacts);
+  return "Success remove";
 
   //   const newContacts = contacts.filter((_, index) => index.id !== idx);
   //   await updateContacts(newContacts);

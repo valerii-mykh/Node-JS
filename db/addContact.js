@@ -4,11 +4,13 @@ const fs = require("fs/promises");
 const contactsPath = require("./contactsPath");
 const listContacts = require("./listContacts");
 
-const addContact = async (data) => {
-  const contacts = await listContacts();
-  const newContact = { ...data, id: v4() };
-  contacts.push(newContact);
-  await fs.writeFile(contactsPath, JSON.stringify(contacts));
+const addContact = async (name, email, phone) => {
+  const allContacts = await listContacts();
+  const newContact = { name: name, email: email, phone: phone, id: v4() };
+  allContacts.push(newContact);
+  console.log("++", contactsPath);
+  await fs.writeFile(contactsPath, JSON.stringify(allContacts));
+  console.table(allContacts);
   return newContact;
 };
 module.exports = addContact;
