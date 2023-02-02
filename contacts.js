@@ -6,14 +6,14 @@ const invokeAction = async ({ action, id, data }) => {
   switch (action) {
     case "listContacts":
       const contacts = await contactsOperations.listContacts();
-      console.log(contacts);
+      console.log("listContacts", contacts);
       break;
     case "getContactById":
       const contact = await contactsOperations.getContactById(id);
       if (!contact) {
         throw new Error(`Contact with id=${id} not found`);
       }
-      console.log(contact);
+      console.log("getContactById", contact);
       break;
     case "addContact":
       const newContact = await contactsOperations.addContact(data);
