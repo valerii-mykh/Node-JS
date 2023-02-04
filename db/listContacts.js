@@ -4,7 +4,7 @@ const contactsPath = require("./contactsPath");
 const listContacts = async () => {
   const data = await fs.readFile(contactsPath);
   const contacts = JSON.parse(data);
-  console.table(contacts);
+  // console.table(contacts);
   return contacts;
 };
 module.exports = listContacts;
